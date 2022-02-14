@@ -37,8 +37,8 @@ class MosaicViewLayout: UICollectionViewLayout {
     var  heightConstant : CGFloat = 300
     var cache = [MosaicLayoutAttributes]()
     fileprivate var contentHeight: CGFloat = 300//0
-    var calculatedWidth: CGFloat = 333
-    var widthConstant : CGFloat = 333
+    var calculatedWidth: CGFloat = 300
+    var widthConstant : CGFloat = 300
     fileprivate var width: CGFloat{
         get{
             let insets = collectionView!.contentInset

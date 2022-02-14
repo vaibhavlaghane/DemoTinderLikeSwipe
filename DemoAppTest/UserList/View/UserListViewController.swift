@@ -68,10 +68,10 @@ class UserListViewController: UIViewController, UIGestureRecognizerDelegate {
         let height = self.view.frame.height
         layout.delegate = self
         layout.numberOfColumns = 1
-        layout.heightConstant = height //- 40
-        layout.widthConstant = width// - 40
+        layout.heightConstant = height - 40
+        layout.widthConstant = width - 40
         layout.calculatedWidth = width
-        layout.cellPadding = 25
+        layout.cellPadding = 5
         
         presenter?.getData()
     }

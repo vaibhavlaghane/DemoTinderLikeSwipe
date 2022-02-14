@@ -205,7 +205,7 @@ extension AlbumsViewController {
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
       heightDimension: groupHeight)
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: isWide ? 4 : 1)
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: isWide ? 4 : 2)
 
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
