@@ -8,28 +8,24 @@
 import UIKit
 
 class CollectionViewRoundedCell: UICollectionViewCell {
-    static let reuseCellIdentifier = CollectionViewRoundedCell.self
-    @IBOutlet weak var title: UILabel! = UILabel()
-    @IBOutlet weak var userImage: UIImageView! = UIImageView()
+    static let reuseCellIdentifier = CollectionViewRoundedCell.self // TODO: cell reuseIdentifiers are usually strings, not classes.  Additionally, since this is not ever used, I'd delete it altogether.
+    static let reuseID = "CollectionViewRoundedCell"
+    static let nibName = "CollectionViewRoundedCell"
     
-    @IBOutlet weak var info: UILabel! = UILabel() 
+    @IBOutlet weak var title: UILabel! // TODO: I'd rename title & info, to primaryTextLabel, and secondaryTextLabel
+    @IBOutlet weak var userImage: UIImageView! // TODO: As this is just a general CollectionViewRoundedCell class (not specific to a user), I'd rename this to imageView
+    
+    @IBOutlet weak var info: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    
-//    var user: UserData{
-//        didSet{
-//            if let tUser = user{
-//                
-//            }
-//        }
-//    }
-    
+
+    // TODO: I'd get rid of any unnecessary code.  Since you're overriding this init, but not doing anything, its just cluttering up the code
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        //fatalError("init(coder:) has not been implemented")
+        //fatalError("init(coder:) has not been implemented") // TODO: Delete this line
     }
     
     override func awakeFromNib() {
@@ -39,15 +35,18 @@ class CollectionViewRoundedCell: UICollectionViewCell {
         self.layer.borderWidth = 3
         self.layer.borderColor = UIColor(red: 0.5, green: 0.47, blue: 0.25, alpha: 1.0).cgColor
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         userImage.image = nil
         title.text = ""
         info.text = ""
     }
-    override  func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-        let attributes = layoutAttributes as! MosaicLayoutAttributes
-        imageViewHeightConstraint.constant = attributes.imageHeight
+        // Using layout attributre is a good choice, but dont force unwrap
+        guard let attributes = layoutAttributes as? MosaicLayoutAttributes else { return }
+        imageViewHeightConstraint.constant = attributes.imageHeight // TODO: Consider setting all your constraints programatically.  In fact, I'd suggest not using xib for layouts, and possibly create all views programatically.
     }
 }

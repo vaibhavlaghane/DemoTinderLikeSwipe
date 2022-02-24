@@ -7,16 +7,17 @@
 
 import Foundation
 
-class UserListPresenter:UserListInteractorToPresenterProcotol{
-    var interactor: UserListPresenterToInteractorProtocol?
-    var view: UserListPresenterToViewProtocol?
-    var router: UserListRouterProtocol?
-}
-
-extension UserListPresenter {
-    func receivedData(_ userList: [UserData]) {
+class UserListPresenter: InteractiveUserListPresenter {
+    var interactor: UserListPresenterToInteractorProtocol? // TODO: Maybe consider using dependency injection
+    var view: PresentableUserListView? // TODO: Maybe consider using dependency injection
+    var router: UserListRouterProtocol? // TODO: Maybe consider using dependency injection
+    
+    
+    // MARK: - InteractiveUserListPresenter
+    
+    func present<ListItem>(listItems: [ListItem]) {
         print("received data from interactor ")
-        view?.showUserList(userList)
+        view?.show(listItems: listItems)
     }
     
     func receivedDetails() {
@@ -26,6 +27,8 @@ extension UserListPresenter {
     func receivedImage() {
         print("received Imge from Interactor")
     }
+    
+    
 }
 
 extension UserListPresenter: UserListViewToPresenterProtocol{

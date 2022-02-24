@@ -11,23 +11,23 @@ protocol UserListViewToPresenterProtocol{
     func getData()
 }
 
-protocol UserListPresenterToViewProtocol{
-    func showUserList(_ userData: [UserData])
+protocol PresentableUserListView {
+    func show<ListItem>(listItems: [ListItem])
 }
 
-protocol UserListInteractorToPresenterProcotol {
-    var interactor: UserListPresenterToInteractorProtocol? {get set }
-    var view: UserListPresenterToViewProtocol?{get set }
-    var router: UserListRouterProtocol? {get set }
+protocol InteractiveUserListPresenter {
+    var interactor: UserListPresenterToInteractorProtocol? { get set }
+    var view: PresentableUserListView? { get set }
+    var router: UserListRouterProtocol? { get set }
     
-    func receivedData(_ userData: [UserData ])
-    func receivedDetails()
-    func receivedImage()
+    func present<ListItem>(listItems: [ListItem])
+    func receivedDetails() // TODO: rename present(details:)
+    func receivedImage() // TODO: rename present(image:)
     
 }
 
 protocol UserListPresenterToInteractorProtocol {
-    var presenter: UserListInteractorToPresenterProcotol? {get set }
+    var presenter: InteractiveUserListPresenter? { get set }
     
     func fetchData()
     func fetchDetails()
