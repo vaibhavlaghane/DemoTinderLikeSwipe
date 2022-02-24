@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEB08E3027C72396004E373A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB08E2F27C72396004E373A /* Constants.swift */; };
 		DC38548A27A5A36900835BE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC38548927A5A36900835BE3 /* AppDelegate.swift */; };
 		DC38548C27A5A36900835BE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC38548B27A5A36900835BE3 /* SceneDelegate.swift */; };
 		DC38548E27A5A36900835BE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC38548D27A5A36900835BE3 /* ViewController.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BEB08E2F27C72396004E373A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DC38548627A5A36900835BE3 /* DemoAppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoAppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC38548927A5A36900835BE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC38548B27A5A36900835BE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				DC47D30027A8D65E002AF34D /* Presenter */,
 				DC47D2FF27A8D64F002AF34D /* Interactor */,
 				DC47D2FE27A8D644002AF34D /* Entity */,
+				BEB08E2F27C72396004E373A /* Constants.swift */,
 			);
 			path = UserList;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				DC38548E27A5A36900835BE3 /* ViewController.swift in Sources */,
 				DC61714C27B7A24A006C2E88 /* SharedAlbumItemCell.swift in Sources */,
 				DC47D31827A97F74002AF34D /* CollectionViewRoundedCell.swift in Sources */,
+				BEB08E3027C72396004E373A /* Constants.swift in Sources */,
 				DC47D31427A97231002AF34D /* TinderNetwork.swift in Sources */,
 				DC61714E27B7A35C006C2E88 /* HeaderView.swift in Sources */,
 				DC61714B27B7A24A006C2E88 /* FeaturedAlbumItemCell.swift in Sources */,

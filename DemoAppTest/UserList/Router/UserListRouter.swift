@@ -7,9 +7,10 @@
 
 import Foundation
 
-class UserListRouter:UserListRouterProtocol{
-    class  func createModule(_ userListView: UserListViewController) {
-        var  presenter : UserListViewToPresenterProtocol & UserListInteractorToPresenterProcotol = UserListPresenter()
+class UserListRouter: UserListRouterProtocol{
+    
+    class func createModule(_ userListView: UserListViewController) {
+        var presenter: UserListViewToPresenterProtocol & InteractiveUserListPresenter = UserListPresenter()
         presenter.router = UserListRouter()
         presenter.view = userListView
         let interactor = UserListInteractor()
@@ -17,4 +18,5 @@ class UserListRouter:UserListRouterProtocol{
         presenter.interactor = interactor
         userListView.presenter = presenter
     }
+    
 }
