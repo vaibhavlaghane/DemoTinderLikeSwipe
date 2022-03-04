@@ -9,10 +9,10 @@ import UIKit
 
 class CollectionViewRoundedCell: UICollectionViewCell {
     static let reuseCellIdentifier = CollectionViewRoundedCell.self
-    @IBOutlet weak var title: UILabel! = UILabel()
-    @IBOutlet weak var userImage: UIImageView! = UIImageView()
+    @IBOutlet weak var title: UILabel! //= UILabel()
+    @IBOutlet weak var userImage: UIImageView!// = UIImageView()
     
-    @IBOutlet weak var info: UILabel! = UILabel() 
+    @IBOutlet weak var info: UILabel! //= UILabel()
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     
 //    var user: UserData{
@@ -48,6 +48,6 @@ class CollectionViewRoundedCell: UICollectionViewCell {
     override  func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         let attributes = layoutAttributes as! MosaicLayoutAttributes
-        imageViewHeightConstraint.constant = attributes.imageHeight
+        //imageViewHeightConstraint.constant = 100//attributes.imageHeight
     }
 }

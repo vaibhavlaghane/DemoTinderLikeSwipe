@@ -27,8 +27,18 @@ class UserListInteractor:  UserListPresenterToInteractorProtocol{
         }
     }
     
-    func fetchDetails() {
+    func fetchDetails(_ id: String) {
+         
         print("fetch details call - by presenter")
+        Network.fetchuserDetails(breedId: id) { [weak self ] (result ) in
+            switch result{
+            case .success(let image ):
+                self?.presenter?.receivedDetails(id , image )
+            case .failure(let error ):
+                print(error,"error occured while getgin image ")
+                
+            }
+        }
     }
     
     func fetchImage() {

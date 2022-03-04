@@ -102,7 +102,11 @@ extension UserListViewController: UserListPresenterToViewProtocol{
     func showUserList() {
         print("user list from presenter to VIew ")
     }
-    
+    func reloadList() {
+        DispatchQueue.main.async {[weak self ] in
+            self?.collectionView.reloadData()
+        }
+    }
     
 }
 
@@ -131,8 +135,17 @@ extension UserListViewController: UICollectionViewDelegate, UICollectionViewData
             //rightIndex = IndexPath(item: indexPath.item + 1 , section: indexPath.section)
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  "CollectionViewRoundedCell", for: indexPath) as! CollectionViewRoundedCell
+        let user = userList[indexPath.item]
         cell.title.text = userList[indexPath.item].name
         cell.info.text = userList[indexPath.item].description
+        
+        if let id = user.id{
+            if let image = presenter?.images[id]{
+                cell.userImage.image = image
+            }else{
+                presenter?.getImage(id)
+            }
+        }
         return cell 
     }
     
