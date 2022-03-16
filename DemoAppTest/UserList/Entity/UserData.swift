@@ -11,19 +11,19 @@ import Foundation
 struct UserData: Decodable, Hashable {
     /// internal ID
     let id: String?
-    
+
     /// Name of cat (e.g. "Somali")
     let name: String?
-    
+
     /// Description
     let description: String?
-    
+
     /// Range (e.g. 12-16)
     let life_span: String?
-    
+
     /// Reference
     let wikipedia_url: String?
-    
+
     /// General traits and characteristic rankings (0-10)
     let adaptability: Int?
     let affection_level: Int?
@@ -46,5 +46,6 @@ struct UserDetails: Decodable {
         let name: String?
         let temperament: String?
     }
-    let url: String?    // image URL
+
+    let url: String? // image URL
 }

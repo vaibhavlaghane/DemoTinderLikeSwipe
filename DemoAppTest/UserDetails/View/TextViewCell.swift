@@ -15,10 +15,11 @@ class TextCell: UICollectionViewCell {
         super.init(frame: frame)
         configure()
     }
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("not implemnted")
     }
-
 }
 
 extension TextCell {
@@ -32,7 +33,7 @@ extension TextCell {
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
-            ])
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
+        ])
     }
 }

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class UserListRouter:UserListRouterProtocol{
-    class  func createModule(_ userListView: UserListViewController) {
-        var  presenter : UserListViewToPresenterProtocol & UserListInteractorToPresenterProcotol = UserListPresenter()
+class UserListRouter: UserListRouterProtocol {
+    class func createModule(_ userListView: UserListViewController) {
+        var presenter: UserListViewToPresenterProtocol & UserListInteractorToPresenterProcotol = UserListPresenter()
         presenter.router = UserListRouter()
         presenter.view = userListView
         let interactor = UserListInteractor()
