@@ -35,9 +35,9 @@ class MosaicViewLayout: UICollectionViewLayout {
     var numberOfColumns = 0
     var numberOfRows = 0
     var cellPadding: CGFloat = 0
-    var heightConstant: CGFloat = 300
+    var heightConstant: CGFloat = 400
     var cache = [MosaicLayoutAttributes]()
-    fileprivate var contentHeight: CGFloat = 300 // 0
+    fileprivate var contentHeight: CGFloat = 400 // 0
     var calculatedWidth: CGFloat = 300
     var widthConstant: CGFloat = 300
     fileprivate var width: CGFloat {
@@ -49,8 +49,7 @@ class MosaicViewLayout: UICollectionViewLayout {
         }
     }
 
-    override var collectionViewContentSize: CGSize {
-//        return CGSize(width: width, height: contentHeight)
+    override var collectionViewContentSize: CGSize { 
         return CGSize(width: calculatedWidth, height: heightConstant)
     }
 
@@ -60,37 +59,7 @@ class MosaicViewLayout: UICollectionViewLayout {
 
     override func prepare() {
         if cache.isEmpty {
-            /*
-             let columnWidth = width/CGFloat(numberOfColumns)
-
-             var xOffsets = [CGFloat]()
-             for column in 0..<numberOfColumns{
-                 xOffsets.append(CGFloat(column)*columnWidth)
-             }
-
-             var yOffsets = [CGFloat] (repeating: 0, count: numberOfColumns)
-
-             var column = 0
-             for item in 0..<collectionView!.numberOfItems(inSection: 0){
-                 let indexPath = IndexPath(item: item, section: 0)
-
-                 let width = columnWidth - (cellPadding*2)
-                 let imageHeight = delegate.collectionView(collectionView!, heightForImageAtIndexpath: indexPath, withWidth: width)
-                 let descriptionHeight = delegate.collectionView(collectionView!, heightForDescriptionAtIndexPath: indexPath, withWidth: width)
-
-                 var  height = cellPadding + imageHeight + descriptionHeight + cellPadding
-                 height = heightConstant
-                 let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: columnWidth, height: height)
-                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
-                 let attributes = MosaicLayoutAttributes(forCellWith: indexPath)
-                 attributes.frame = insetFrame
-                 attributes.imageHeight = imageHeight
-                 cache.append(attributes)
-                 contentHeight = max(contentHeight, frame.maxY)
-                 yOffsets[column] = yOffsets[column] + height
-                 column = column >= (numberOfColumns - 1) ? 0 : column + 1
-             }
-             */
+           
             prepareHelper()
         }
     }
@@ -110,7 +79,7 @@ class MosaicViewLayout: UICollectionViewLayout {
         for item in 0 ..< collectionView!.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
 
-            let width = columnWidth - (cellPadding * 2)
+            let width = columnWidth //- (cellPadding * 2)
 
             let x = CGFloat(item) * columnWidth
             let frame = CGRect(x: x, y: 0, width: width, height: rowHeight)
@@ -118,9 +87,6 @@ class MosaicViewLayout: UICollectionViewLayout {
             let attributes = MosaicLayoutAttributes(forCellWith: indexPath)
             attributes.frame = insetFrame
             cache.append(attributes)
-//            contentHeight = max(contentHeight, frame.maxY)
-//            yOffsets[column] = yOffsets[column] + height
-//            column = column >= (numberOfColumns - 1) ? 0 : column + 1
             calculatedWidth = x + columnWidth
         }
     }

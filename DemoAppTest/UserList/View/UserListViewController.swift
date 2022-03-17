@@ -17,6 +17,7 @@ class UserListViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startX: CGFloat = 0.0
     private var startY: CGFloat = 0.0
     private var didTap = true
+    private var widthCell:CGFloat = 0
 
     var delegate: UserPhotosDelegate?
 
@@ -34,8 +35,7 @@ class UserListViewController: UIViewController, UIGestureRecognizerDelegate {
         if recognizer.state == .ended {
             UIView.animate(withDuration: 0.4) { [weak self] in
                 self?.checkDirection()
-            } completion: { [weak self] _ in
-            }
+            }  
         }
     }
 
@@ -60,7 +60,6 @@ class UserListViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.register(nib, forCellWithReuseIdentifier: "CollectionViewRoundedCell")
         // Do any additional setup after loading the view.
         navigationController?.isToolbarHidden = true
-        // collection view
         collectionView.isScrollEnabled = true
         collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
 
@@ -70,22 +69,13 @@ class UserListViewController: UIViewController, UIGestureRecognizerDelegate {
         layout.delegate = self
         layout.numberOfColumns = 1
         layout.heightConstant = height - 40
-        layout.widthConstant = width - 40
+        layout.widthConstant = width //- 40
         layout.calculatedWidth = width
-        layout.cellPadding = 5
+        widthCell = layout.calculatedWidth
+        layout.cellPadding = 0//5
 
         presenter?.getData()
     }
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }
 
 extension UserListViewController: UserListPresenterToViewProtocol {
@@ -122,19 +112,24 @@ extension UserListViewController: UICollectionViewDelegate, UICollectionViewData
         if didTap {
             if indexPath.item + 1 == leftIndx?.item {
                 leftIndx = indexPath
+//                if(indexPath.row < userList.count - 1 ){
+//                    rightIndex = IndexPath(row: indexPath.row - 2, section: indexPath.section)
+//                }
                 didTap = false
             }
             if indexPath.item - 1 == rightIndex?.item {
                 rightIndex = indexPath
+//                if(indexPath.row > 1){
+//                    leftIndx = IndexPath(row: indexPath.row - 2, section: indexPath.section)
+//                }
                 didTap = false
             }
-            // rightIndex = IndexPath(item: indexPath.item + 1 , section: indexPath.section)
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewRoundedCell", for: indexPath) as! CollectionViewRoundedCell
         let user = userList[indexPath.item]
         cell.title.text = userList[indexPath.item].name
         cell.info.text = userList[indexPath.item].description
-
+        widthCell = cell.bounds.width
         if let id = user.id {
             if let image = presenter?.images[id] {
                 cell.userImage.image = image
@@ -148,7 +143,7 @@ extension UserListViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension UserListViewController: MosaicLayoutDelegate {
     func collectionView(_: UICollectionView, heightForImageAtIndexpath _: IndexPath, withWidth _: CGFloat) -> CGFloat {
-        return 50
+        return 500
     }
 
     func collectionView(_: UICollectionView, heightForDescriptionAtIndexPath _: IndexPath, withWidth _: CGFloat) -> CGFloat {
@@ -162,43 +157,48 @@ extension UserListViewController {
     @objc func handleTap(gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: gesture.view)
         let y = point.y
-        let x = point.x
+        let x = point.x - ( CGFloat( curreIndex?.row ?? 0 ) * widthCell) - widthCell/2
         print("y = \(y)")
         print("x = \(x)")
-        guard let indexPath = rightIndex else {
-            // collectionView.collec
-
+        if x < 0 {
+            handleTapLeft()
             return
         }
-        // collectionView.reloadItems(at: [indexPath])
-        // curreIndex = rightIndex
+        guard let indexPath = rightIndex else {
+            return
+        }
         collectionView.isScrollEnabled = true
-//        self.collectionView.scrolldir
         print("indexpath", indexPath)
 
         rightIndex = IndexPath(item: curreIndex!.item + 1, section: curreIndex!.section)
         didTap = true
         if let row = rightIndex?.row , row  < userList.count {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            curreIndex = indexPath
+            if(indexPath.row > 1){
+                leftIndx = IndexPath(row: rightIndex!.row - 1, section: rightIndex!.section)
+            }
         }
         print("handle tap called ")
     }
     
     @objc func handleTapLeft() {
         guard let indexPath = leftIndx else {
-            // collectionView.collec
-
             return
         }
         collectionView.isScrollEnabled = true
-        print("indexpath", indexPath)
+        print("indexpath left  = ", indexPath)
 
         leftIndx = IndexPath(item: curreIndex!.item - 1, section: curreIndex!.section)
         didTap = true
-        if let row = leftIndx?.row , row  > 0 {
+        if let row = leftIndx?.row , row  >= 0 {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            curreIndex = indexPath
+            if(indexPath.row < userList.count - 1 ){
+                rightIndex = IndexPath(row: leftIndx!.row + 1 , section: leftIndx!.section)
+            }
         }
-        print("handle tap called ")
+        print("handle left tap called ")
     }
 }
 

@@ -11,26 +11,8 @@ class CollectionViewRoundedCell: UICollectionViewCell {
     static let reuseCellIdentifier = CollectionViewRoundedCell.self
     @IBOutlet var title: UILabel! // = UILabel()
     @IBOutlet var userImage: UIImageView! // = UIImageView()
-
     @IBOutlet var info: UILabel! // = UILabel()
     @IBOutlet var imageViewHeightConstraint: NSLayoutConstraint!
-
-//    var user: UserData{
-//        didSet{
-//            if let tUser = user{
-//
-//            }
-//        }
-//    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        // fatalError("init(coder:) has not been implemented")
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
